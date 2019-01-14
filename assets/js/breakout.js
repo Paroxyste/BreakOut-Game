@@ -10,16 +10,30 @@ let lives = 3;
 
 let animRepeat;
 let ballDir = [5, 5, 5];
-let containerDim = container.getBoundingClientRect();
+let zoneGameDim = zoneGame.getBoundingClientRect();
 
 btn_start.addEventListener('click', startGame);
 
 document.addEventListener('keyleft', function(e) {
+  let key = e.keyCode;
+  e.preventDefault();
 
+  if(key === 37) {
+    paddle.left = true;
+  } else if(key === 39) {
+    paddle.right = true;
+  };
 });
 
 document.addEventListener('keyright', function(e) {
+  let key = e.keyCode;
+  e.preventDefault();
 
+  if(key === 37) {
+    paddle.left = false;
+  } else if(key === 39) {
+    paddle.right = false;
+  };
 });
 
 function startGame() {
