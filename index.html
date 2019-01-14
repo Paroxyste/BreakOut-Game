@@ -16,7 +16,11 @@
 <body>
   <nav>
     <div class="nav-wrapper teal lighten-3">
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+
+      <ul class="left hide-on-med-and-down">
         <li class="active startBtn"><a href="#">
           <i class="material-icons left">videogame_asset</i>
           <b>START GAME</b></a>
@@ -35,9 +39,29 @@
             <i class="material-icons left">favorite</i> Lives : 5
           </a>
         </li>
-      <ul>
+      </ul>
     </div>
   </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li class="startBtn">
+      <a class="waves-effect waves-light btn teal lighten-3">
+      <i class="material-icons left">videogame_asset</i>
+      <b>START GAME</b></a>
+    </li>
+
+    <li>
+      <a class="waves-effect waves-light btn red lighten-2">
+        <i class="material-icons left">grade</i> Score : 150000
+      </a>
+    </li>
+
+    <li>
+      <a class="waves-effect waves-light btn red lighten-2">
+        <i class="material-icons left">favorite</i> Lives : 5
+      </a>
+    </li>
+  </ul>
 
   <div class="container grey lighten-4">
     <div id="zoneGame" class="grey lighten-4">
@@ -50,6 +74,12 @@
 	<script src="assets/js/lib/jquery-3-3-1.js"></script>
 	<script src="assets/js/lib/materialize.min.js"></script>
 	<script src="assets/js/breakout.js"></script>
+
+  <script>
+      $(document).ready(function(){
+          $('.sidenav').sidenav();
+      });
+  </script>
 
 </body>
 </html>
