@@ -1,0 +1,28 @@
+#zoneGame {
+  position: relative;
+  height: 500px;
+  width: 100%;
+  margin: 9px auto;
+  border: 2px solid #e0e0e0;
+  border-radius: 3px;
+  overflow:hidden;
+}
+
+#ball {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 15px;
+  width: 15px;
+  border-radius: 25px;
+}
+
+#paddle {
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  height: 10px;
+  width: 125px;
+  border-radius: 25px;
+  box-shadow: 0 5px 6px -4px #212121;
+}
