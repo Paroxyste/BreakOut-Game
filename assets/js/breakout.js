@@ -91,7 +91,11 @@ function update() {
     }
 
     paddle.style.left = pCurrent + 'px';
+    if(!gameInPlay) {
+      waitingOnPaddle();
+    } else {
+      ballMove();
+    }
     animRepeat = requestAnimationFrame(update);
-
   }
-};
+}
