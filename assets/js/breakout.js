@@ -60,6 +60,18 @@ function setupBricks(num) {
   }
 }
 
+function brickMaker(row) {
+  let div = document.createElement('div');
+      div.setAttribute('class', 'brick');
+      div.style.background = 'linear-gradient('+ ranColor() + ',' ranColor() +')';
+      let pointDiv = Math.ceil(Math.random() * 10) + 2;
+      div.dataset.points = pointDiv;
+      div.innerHTML = pontDiv;
+      div.style.left = row.x + 'px';
+      div.style.top = row.y + 'px';
+      container.appendChild(div);
+}
+
 function update() {
   if(gameOver === false) {
     let pCurrent = paddle.offsetLeft;
