@@ -3,7 +3,7 @@ let ball = document.querySelector('#ball');
 let paddle = document.querySelector('#paddle');
 let btn_start = document.querySelector('.startBtn');
 
-let gameOver = false;
+let gameOver = true;
 let gameInPlay = false;
 let score = 0;
 let lives = 3;
@@ -20,6 +20,7 @@ document.addEventListener('keydown', function(e) {
 
   if(key === 37) paddle.left = true;
   else if(key === 39) paddle.right = true;
+  else if(key === 38) && !gameInPlay) gameInPlay = true;
 });
 
 document.addEventListener('keyup', function(e) {
@@ -31,12 +32,17 @@ document.addEventListener('keyup', function(e) {
 });
 
 function startGame() {
-  document.querySelector('.gameover').style.display = 'none';
-  ball.style.display = 'block';
-  animRepeat = requestAnimationFrame(update);
-  gameOver = false;
-  gameInPlay = true;
-};
+  if(gameOver) {
+    document.querySelector('.gameover').style.display = 'none';
+    ball.style.display = 'block';
+    lives = 1;
+    setupBricks(12);
+    lifeUpdater();
+    animRepeat = requestAnimationFrame(update);
+    gameOver = false;
+    gameInPlay = false;
+  }
+}
 
 function update() {
   if(gameOver === false) {
