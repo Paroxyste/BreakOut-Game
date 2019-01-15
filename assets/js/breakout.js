@@ -40,4 +40,12 @@ function startGame() {
   document.querySelector('.gameover').style.display = 'none';
   ball.style.display = 'block';
   animRepeat = requestAnimationFrame(update);
+  gameOver = false;
+  gameInPlay = true;
+};
+
+function update() {
+  if(gameOver === false) {
+    let pCurrent = paddle.offsetLeft;
+  }
 }
