@@ -36,3 +36,16 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+.brick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 50px;
+  padding: 5px;
+  color: white;
+  box-shadow: 0px 1px 8px 0px black;
+  font-size: 1.9em;
+  text-align: center;
+}
