@@ -37,5 +37,7 @@ document.addEventListener('keyright', function(e) {
 });
 
 function startGame() {
-
+  document.querySelector('.gameover').style.display = 'none';
+  ball.style.display = 'block';
+  animRepeat = requestAnimationFrame(update);
 }
