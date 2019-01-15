@@ -15,6 +15,7 @@
   height: 15px;
   width: 15px;
   border-radius: 25px;
+  display: none;
 }
 
 #paddle {
@@ -25,4 +26,14 @@
   width: 125px;
   border-radius: 25px;
   box-shadow: 0 5px 6px -4px #212121;
+}
+
+.gameover {
+  position: absolute;
+  width: 100%;
+  color: red;
+  font-size: 3em;
+  line-height: 300px;
+  text-align: center;
+  text-transform: uppercase;
 }
