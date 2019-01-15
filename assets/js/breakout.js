@@ -35,12 +35,28 @@ function startGame() {
   if(gameOver) {
     document.querySelector('.gameover').style.display = 'none';
     ball.style.display = 'block';
-    lives = 1;
-    setupBricks(12);
+    lives = 3;
+    setupBricks(24);
     lifeUpdater();
     animRepeat = requestAnimationFrame(update);
     gameOver = false;
     gameInPlay = false;
+  }
+}
+
+function setupBricks(num) {
+  let row = {
+    x: ((containerDim.width % 100) /2),
+    y: 50
+  };
+
+  for(let x = 0, x < num; x++) {
+    if(row.x > (containerDim.width - 100)) {
+       row.y += 70;
+       row.x = ((containerDim.width % 100) / 2);
+    }
+    brickMaker(row);
+    row.x += 100;
   }
 }
 
