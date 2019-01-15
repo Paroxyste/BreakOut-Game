@@ -72,6 +72,15 @@ function brickMaker(row) {
       container.appendChild(div);
 }
 
+function ranColor() {
+  function color() {
+    let hex = Math.floor(Math.random() * 256).toString(16);
+    let response = ('0' + String(hex)).substr(-2);
+    return response;
+  }
+  return '#' + c() + c() + c();
+}
+
 function update() {
   if(gameOver === false) {
     let pCurrent = paddle.offsetLeft;
