@@ -148,7 +148,7 @@ function ballMove() {
 }
 
 function lifeUpdater() {
-  document.queryDelector('lives').innerText = lives;
+  document.querySelector('lives').innerText = lives;
 }
 
 function scoreUpdate(num) {
@@ -161,4 +161,16 @@ function stopper() {
   ballDir[0, -5];
   waitingOnPaddle();
   window.cancelAnimationFrame(animRepeat);
+}
+
+function endGame() {
+  document.querySelector('.gameover').style.display = 'block';
+  document.querySelector('.gameover').innerHTML = 'GAME OVER<br>Your Score' + score;
+  gameOver = true;
+  ball.style.display = 'none';
+
+  let tempBricks = document.querySelectorAll('.brick');
+  for(var targetBrick of tempBricks) {
+    targetBrick.parentNode.removeChild(targetBrick);
+  }
 }
