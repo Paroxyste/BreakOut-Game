@@ -1,19 +1,25 @@
-.container {
+body {
+  background-color: #212121;
+}
+
+#container {
   position: relative;
-  height: 500px;
-  margin: 9px auto;
-  border: 2px solid #e0e0e0;
-  border-radius: 3px;
+  width: 80%;
+  height: 466px;
+  margin: auto;
+  border: 2px dashed #424242;
   overflow:hidden;
+  opacity: .9;
 }
 
 #ball {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 15px;
-  width: 15px;
+  height: 10px;
+  width: 10px;
   border-radius: 25px;
+  background-color: #bcaaa4;
   display: none;
 }
 
@@ -21,31 +27,28 @@
   position: absolute;
   left: 50%;
   bottom: 7px;
-  height: 10px;
+  height: 7px;
   width: 125px;
-  border-radius: 25px;
+  background-color: #8d6e63;
   box-shadow: 0 5px 6px -4px #212121;
 }
 
-.gameover {
-  position: absolute;
-  width: 100%;
-  color: red;
-  font-size: 3em;
-  line-height: 300px;
-  text-align: center;
-  text-transform: uppercase;
+.brick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 89px;
+    height: 18px;
+    color: white;
+    font-size: .8em;
+    padding: 5px;
+    text-align: center;
 }
 
-.brick {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 80px;
-  height: 50px;
-  padding: 5px;
-  color: white;
-  box-shadow: 0px 1px 8px 0px black;
-  font-size: 1.9em;
-  text-align: center;
+.score, .lives {
+  padding-left: 10px;
+}
+
+#startBtn {
+  margin-left: 30px;
 }
