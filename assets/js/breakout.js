@@ -99,3 +99,50 @@ function update() {
     animRepeat = requestAnimationFrame(update);
   }
 }
+
+function waitingOnPaddle() {
+  ball.style.top = (paddle.offsetTop - 22) + 'px';
+  ball.style.left = (paddle.offsetLeft + 70) + 'px';
+}
+
+function ballMove() {
+  let x = ball.offsetLeft;
+  let y = ball.offsetTop;
+
+  if(x > (containerDim.width - 20) || x < 0) {
+    ballDir[0] *= -1;
+  }
+
+  if(y > (containerDim.height - 20) || y < 0) {
+    if(y > (containerDim.height - 20)) {
+      fallOffEdge();
+      return;
+    }
+    ballDir[1] *= 1;
+  }
+
+  if(isCollide(ball, paddle)) {
+    let nDir = ((x - paddle.offsetLeft) - (paddle.offsetWidth / 2)) / 10;
+    ballDir[0] = nDir;
+    ballDir[1] *= -1;
+  }
+
+  let tempBricks = document.querySelectorAll('.brick');
+  if(tempBricks.length == 0) {
+    stopper();
+    setupBricks(20);
+  }
+
+  for(let targetBrick of tempBricks) {
+    if(isCollide(targetBrick, ball)) {
+      ballDir[1] *= -1;
+      targetBrick.parentNode.removeChild(targetBrick);
+      scoreUpdate(targetBrick.dataset.points);
+    }
+  }
+
+  x += ballDir[0];
+  y += ballDir[1];
+  ball.style.top = y + 'px';
+  ball.style.left = x + 'px';
+}
