@@ -174,3 +174,23 @@ function endGame() {
     targetBrick.parentNode.removeChild(targetBrick);
   }
 }
+
+function fallOffEdge() {
+  lives--;
+  if(lives < 0) {
+    endGame();
+    lives = 0;
+  }
+  lifeUpdater();
+  stopper();
+}
+
+function isCollide(a, b) {
+  let aRect = a.getBoundingClientRect();
+  let bRect = b.getBoundingClientRect();
+
+  return (!(aRect.bottom < bRect.top ||
+            aRect.top > bRect.bottom ||
+            aRect.right < bRect.left ||
+            aRect.left > bRect.right));
+}
