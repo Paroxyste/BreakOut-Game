@@ -146,3 +146,19 @@ function ballMove() {
   ball.style.top = y + 'px';
   ball.style.left = x + 'px';
 }
+
+function lifeUpdater() {
+  document.queryDelector('lives').innerText = lives;
+}
+
+function scoreUpdate(num) {
+  score += parseInt(num);
+  document.querySelector('.score').innerText = score;
+}
+
+function stopper() {
+  gameInPlay = false;
+  ballDir[0, -5];
+  waitingOnPaddle();
+  window.cancelAnimationFrame(animRepeat);
+}
