@@ -2,8 +2,6 @@
 
 **Breakout is a game written in Javascript with a minimalist interface made with the UIkit framework.**
 
-> [**Project Preview**](https://laurent-dev.fr/preview/BREAKOUT/index.html)
-
 ### Current Version ###
 
 Library | Version | Download Link
