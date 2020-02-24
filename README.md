@@ -1,6 +1,6 @@
 # JS-Games #
 
-**JS-Games regroupe des mini-jeux écrits en Javascript.**
+**JS-Games groups together mini-games written in Javascript and playable via the browser.**
 
 ### Games Lists ###
 
