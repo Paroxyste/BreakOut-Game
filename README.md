@@ -1,15 +1,10 @@
-# Breakout #
+# JS-Games #
 
-**Breakout is a game written in Javascript with a minimalist interface made with the UIkit framework.**
+**JS-Games regroupe des mini-jeux écrits en Javascript.**
 
-### Current Version ###
+### Games Lists ###
 
-Library | Version | Download Link
+Library | Version | Adress Link
 ------------- | ------------- | -------------
-UIkit  | 3.0.2  | [Download](https://getuikit.com/download)
-
-### Credits ###
-
-Author |  Years | Licence | Source
-------------- | ------------- | ------------- | -------------
-Paroxyste | 2019  | None  | [Packtpub](https://www.packtpub.com/application-development/javascript-breakout-game-exercise-video)
+Breakout  | 0.0.1  | [Download](https://github.com/Paroxyste/JS-Games/tree/master/Breakout)
+FlappyBird  | 0.0.1  | [Download](https://github.com/Paroxyste/JS-Games/tree/master/FlappyBird)
