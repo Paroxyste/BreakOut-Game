@@ -7,7 +7,7 @@ const DEGREE = Math.PI / 180;
 
 // Load menu image
 const sprite = new Image();
-sprite.src   = 'images/sprite.png';
+sprite.src   = 'images/game_element.png';
 
 // Load sounds
 const COIN   = new Audio();
@@ -370,3 +370,4 @@ function loop(){
 }
 
 loop();
+
