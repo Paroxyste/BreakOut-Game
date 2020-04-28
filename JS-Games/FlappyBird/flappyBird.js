@@ -16,11 +16,11 @@ const FLAP   = new Audio();
 const HITS   = new Audio();
 const SWOOSH = new Audio();
 
-COIN.src   = 'https://github.com/Paroxyste/Javascript/tree/master/JS-Games/FlappyBird/sounds/sfx_point.wav?raw=true';
-DIE.src    = 'https://github.com/Paroxyste/Javascript/tree/master/JS-Games/FlappyBird/sounds/sfx_die.wav?raw=true';
-FLAP.src   = 'https://github.com/Paroxyste/Javascript/tree/master/JS-Games/FlappyBird/sounds/sfx_flap.wav?raw=true';
-HITS.src   = 'https://github.com/Paroxyste/Javascript/tree/master/JS-Games/FlappyBird/sounds/sfx_hit.wav?raw=true';
-SWOOSH.src = 'https://github.com/Paroxyste/Javascript/tree/master/JS-Games/FlappyBird/sounds/sfx_swooshing.wav?raw=true';
+COIN.src   = 'https://github.com/Paroxyste/Javascript/blob/master/JS-Games/FlappyBird/sounds/sfx_point.wav?raw=true';
+DIE.src    = 'https://github.com/Paroxyste/Javascript/blob/master/JS-Games/FlappyBird/sounds/sfx_die.wav?raw=true';
+FLAP.src   = 'https://github.com/Paroxyste/Javascript/blob/master/JS-Games/FlappyBird/sounds/sfx_flap.wav?raw=true';
+HITS.src   = 'https://github.com/Paroxyste/Javascript/blob/master/JS-Games/FlappyBird/sounds/sfx_hit.wav?raw=true';
+SWOOSH.src = 'https://github.com/Paroxyste/Javascript/blob/master/JS-Games/FlappyBird/sounds/sfx_swooshing.wav?raw=true';
 
 // Game state
 const state = {
