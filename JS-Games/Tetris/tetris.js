@@ -223,3 +223,35 @@ tetrominos.prototype.lock = function() {
 }
 
 // ------------------------------------------------------------------ Collision
+
+tetrominos.prototype.collision = function(x, y, piece) {
+    for(r = 0; r < piece.length; r++) {
+        for(c = 0; c < piece.length; c++) {
+            // If square is empty, skip it
+            if (!piece[r][c]) {
+                continue;
+            }
+
+            // Coordinates of the pieces after movment
+            let newX = this.x + c + x;
+            let newY = this.y + r + y;
+
+            if (newX < 0 || newX >= COL || newY >= ROW) {
+                return true;
+            }
+
+            if (newY < 0) {
+                continue;
+            }
+
+            // Check if there is a locked piece already in place
+            if (board[newX][newY] != GDC) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+// ---------------------------------------------------------------- Control key
