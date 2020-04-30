@@ -11,7 +11,7 @@ const GDC = '#1C1C1A'; // Background grid color
 
 // --------------------------------------------------------------- Tetro colors
 
-const TETRO = [
+const TETROCOLOR = [
     [I, '#66BAD2'],
     [J, '#FE8081'],
     [L, '#FD8816'],
@@ -19,7 +19,8 @@ const TETRO = [
     [S, '#70C836'],
     [T, '#DD87CE'],
     [Z, '#AADF87']
-] 
+];
+
 
 // ----------------------------------------------------------------- drawSquare
 
@@ -47,9 +48,7 @@ for(r = 0; r < ROW; r++) {
 
 function drawBoard() {
     for(r = 0; r < ROW; r++) {
-        board[r] = [];
-
-        for (c = 0; c < COL; c++){
+        for(c = 0; c < COL; c++){
             drawSquare(c, r, board[r][c]);
         }
     }
@@ -60,16 +59,16 @@ drawBoard();
 // ---------------------------------------------------------------- randomTetro
 
 function randomTetro() {
-    let rand = Math.floor(Math.random() * TETRO.length); // 0 -> 6 Tetrominos
+    let rand = Math.floor(Math.random() * TETROCOLOR.length); // 0 -> 6 Tetrominos
 
-    return new Tetrominos(TETRO[rand][0], TETRO[rand][1]);
+    return new Piece(TETROCOLOR[rand][0], TETROCOLOR[rand][1]);
 }
 
 let randTetro = randomTetro();
 
 // ----------------------------------------------------------------- tetrominos
 
-function Tetrominos(tetromino, color) {
+function Piece(tetromino, color) {
     this.tetromino = tetromino;
     this.color     = color;
 
@@ -83,7 +82,7 @@ function Tetrominos(tetromino, color) {
 
 // ------------------------------------------------------------------ fill func
 
-Tetrominos.prototype.fill = function(color) {
+Piece.prototype.fill = function(color) {
     for (r = 0; r < this.activeTetro.length; r++) {
         for (c = 0; c < this.activeTetro.length; c++) {
             // Draw only occuped squares
@@ -96,20 +95,20 @@ Tetrominos.prototype.fill = function(color) {
 
 // ------------------------------------------------------------ Draw tetrominos
 
-Tetrominos.prototype.draw = function() {
+Piece.prototype.draw = function() {
     this.fill(this.color);
 }
 
 // ---------------------------------------------------------- Undraw tetrominos
 
-Tetrominos.prototype.unDraw = function() {
+Piece.prototype.unDraw = function() {
     this.fill(GDC);
 }
 
 // ------------------------------------------------------------ Move tetrominos
 
 // Down
-Tetrominos.prototype.moveDown = function() {
+Piece.prototype.moveDown = function() {
     if (!this.collision(0, 1, this.activeTetro)) {
         this.unDraw();
         this.y++;
@@ -122,7 +121,7 @@ Tetrominos.prototype.moveDown = function() {
 }
 
 // Right
-Tetrominos.prototype.moveRight = function() {
+Piece.prototype.moveRight = function() {
     if (!this.collision(1, 0, this.activeTetro)) {
         this.unDraw();
         this.x++;
@@ -131,7 +130,7 @@ Tetrominos.prototype.moveRight = function() {
 }
 
 // Left
-Tetrominos.prototype.moveRight = function() {
+Piece.prototype.moveLeft = function() {
     if (!this.collision(-1, 0, this.activeTetro)) {
         this.unDraw();
         this.x--;
@@ -140,7 +139,7 @@ Tetrominos.prototype.moveRight = function() {
 }
 
 // Rotate
-Tetrominos.prototype.rotate = function() {
+Piece.prototype.rotate = function() {
     let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
     let kick = 0;
 
@@ -170,7 +169,7 @@ let newScore = 0;
 
 // ------------------------------------------------------------ Lock tetrominos
 
-Tetrominos.prototype.lock = function() {
+Piece.prototype.lock = function() {
     for(r = 0; r < this.activeTetro.length; r++) {
         for(c = 0; c < this.activeTetro.length; c++) {
             // Skip GDC squares
@@ -224,7 +223,7 @@ Tetrominos.prototype.lock = function() {
 
 // ------------------------------------------------------------------ Collision
 
-Tetrominos.prototype.collision = function(x, y, piece) {
+Piece.prototype.collision = function(x, y, piece) {
     for(r = 0; r < piece.length; r++) {
         for(c = 0; c < piece.length; c++) {
             // If square is empty, skip it
@@ -245,7 +244,7 @@ Tetrominos.prototype.collision = function(x, y, piece) {
             }
 
             // Check if there is a locked piece already in place
-            if (board[newX][newY] != GDC) {
+            if (board[newY][newX] != GDC) {
                 return true;
             }
         }
