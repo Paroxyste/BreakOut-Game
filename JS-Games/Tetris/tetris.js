@@ -50,7 +50,7 @@ function drawBoard() {
         board[r] = [];
 
         for (c = 0; c < COL; c++){
-            drawSquare(c, y, board[r][c]);
+            drawSquare(c, r, board[r][c]);
         }
     }
 }
@@ -62,14 +62,14 @@ drawBoard();
 function randomTetro() {
     let rand = Math.floor(Math.random() * TETRO.length); // 0 -> 6 Tetrominos
 
-    return new tetrominos(TETRO[rand][0], TETRO[rand][1]);
+    return new Tetrominos(TETRO[rand][0], TETRO[rand][1]);
 }
 
 let randTetro = randomTetro();
 
 // ----------------------------------------------------------------- tetrominos
 
-function tetrominos(tetromino, color) {
+function Tetrominos(tetromino, color) {
     this.tetromino = tetromino;
     this.color     = color;
 
@@ -83,7 +83,7 @@ function tetrominos(tetromino, color) {
 
 // ------------------------------------------------------------------ fill func
 
-tetrominos.prototype.fill = function(color) {
+Tetrominos.prototype.fill = function(color) {
     for (r = 0; r < this.activeTetro.length; r++) {
         for (c = 0; c < this.activeTetro.length; c++) {
             // Draw only occuped squares
@@ -96,23 +96,23 @@ tetrominos.prototype.fill = function(color) {
 
 // ------------------------------------------------------------ Draw tetrominos
 
-tetrominos.prototype.draw = function() {
+Tetrominos.prototype.draw = function() {
     this.fill(this.color);
 }
 
 // ---------------------------------------------------------- Undraw tetrominos
 
-tetrominos.prototype.unDraw = function() {
+Tetrominos.prototype.unDraw = function() {
     this.fill(GDC);
 }
 
 // ------------------------------------------------------------ Move tetrominos
 
 // Down
-tetrominos.prototype.moveDown = function() {
+Tetrominos.prototype.moveDown = function() {
     if (!this.collision(0, 1, this.activeTetro)) {
         this.unDraw();
-        this.y++
+        this.y++;
         this.draw();
     } else {
         // Lock tetrominos and generate a new one
@@ -122,25 +122,25 @@ tetrominos.prototype.moveDown = function() {
 }
 
 // Right
-tetrominos.prototype.moveRight = function() {
-    if (!this.collision(0, 1, this.activeTetro)) {
+Tetrominos.prototype.moveRight = function() {
+    if (!this.collision(1, 0, this.activeTetro)) {
         this.unDraw();
-        this.x++
+        this.x++;
         this.draw();
     }
 }
 
 // Left
-tetrominos.prototype.moveRight = function() {
-    if (!this.collision(0, 1, this.activeTetro)) {
+Tetrominos.prototype.moveRight = function() {
+    if (!this.collision(-1, 0, this.activeTetro)) {
         this.unDraw();
-        this.x--
+        this.x--;
         this.draw();
     }
 }
 
 // Rotate
-tetrominos.prototype.rotate = function() {
+Tetrominos.prototype.rotate = function() {
     let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
     let kick = 0;
 
@@ -170,9 +170,9 @@ let newScore = 0;
 
 // ------------------------------------------------------------ Lock tetrominos
 
-tetrominos.prototype.lock = function() {
+Tetrominos.prototype.lock = function() {
     for(r = 0; r < this.activeTetro.length; r++) {
-        for(c = 0; c < this.activeTetro.length; r++) {
+        for(c = 0; c < this.activeTetro.length; c++) {
             // Skip GDC squares
             if (!this.activeTetro[r][c]) {
                 continue;
@@ -201,7 +201,7 @@ tetrominos.prototype.lock = function() {
 
         if (isRowFull) {
             // If row is full, move down other rows
-            for( y = r; y > 1; y--) {
+            for(y = r; y > 1; y--) {
                 for(c = 0; c < COL; c++) {
                     board[y][c] = board[y - 1][c];
                 }
@@ -224,7 +224,7 @@ tetrominos.prototype.lock = function() {
 
 // ------------------------------------------------------------------ Collision
 
-tetrominos.prototype.collision = function(x, y, piece) {
+Tetrominos.prototype.collision = function(x, y, piece) {
     for(r = 0; r < piece.length; r++) {
         for(c = 0; c < piece.length; c++) {
             // If square is empty, skip it
@@ -255,3 +255,48 @@ tetrominos.prototype.collision = function(x, y, piece) {
 }
 
 // ---------------------------------------------------------------- Control key
+
+document.addEventListener('keydown', CONTROL);
+
+function CONTROL(event) {
+    // Left
+    if (event.keyCode == 37) {
+        randTetro.moveLeft();
+        dropStart = Date.now();
+    } 
+    // Up
+    else if (event.keyCode == 38) {
+        randTetro.rotate();
+        dropStart = Date.now();
+    }
+    // Right
+    else if (event.keyCode == 39) {
+        randTetro.moveRight();
+        dropStart = Date.now();
+    }
+    // Down
+    else if (event.keyCode == 40) {
+        randTetro.moveDown();
+    }
+}
+
+// --------------------------------------------------------------- Control game
+
+let dropStart = Date.now();
+let gameOver  = false;
+
+function drop() {
+    let now   = Date.now();
+    let delta = now - dropStart;
+
+    if (delta > 1000) {
+        randTetro.moveDown();
+        dropStart = Date.now();
+    }
+
+    if (!gameOver) {
+        requestAnimationFrame(drop);
+    }
+}
+
+drop();
