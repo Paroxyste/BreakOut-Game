@@ -166,4 +166,60 @@ tetrominos.prototype.rotate = function() {
     }
 }
 
-let score = 0;
+let newScore = 0;
+
+// ------------------------------------------------------------ Lock tetrominos
+
+tetrominos.prototype.lock = function() {
+    for(r = 0; r < this.activeTetro.length; r++) {
+        for(c = 0; c < this.activeTetro.length; r++) {
+            // Skip GDC squares
+            if (!this.activeTetro[r][c]) {
+                continue;
+            }
+
+            // Lock on top = Game Over
+            if (this.y + r < 0) {
+                alert('GAME OVER');
+                gameOver =  true;
+
+                break;
+            }
+
+            // Lock tetrominos
+            board[this.y + r][this.x + c] = this.color;
+        }
+    }
+
+    // Remove full rows
+    for(r = 0; r < ROW; r++) {
+        let isRowFull = true;
+
+        for(c = 0; c < COL; c++) {
+            isRowFull = isRowFull && (board[r][c] != GDC);
+        }
+
+        if (isRowFull) {
+            // If row is full, move down other rows
+            for( y = r; y > 1; y--) {
+                for(c = 0; c < COL; c++) {
+                    board[y][c] = board[y - 1][c];
+                }
+            }
+
+            // The top row board[0][..] has no row above it
+            for(c = 0; c < COL; c++) {
+                board[0][c] = GDC;
+            }
+
+            // Increment score
+            newScore += 10;
+        }
+    }
+
+    // Update board + score
+    drawBoard();
+    score.innerHTML = newScore;
+}
+
+// ------------------------------------------------------------------ Collision
