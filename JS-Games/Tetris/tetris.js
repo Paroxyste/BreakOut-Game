@@ -212,7 +212,7 @@ Piece.prototype.lock = function() {
             }
 
             // Increment score
-            newScore += 10;
+            newScore += 1;
         }
     }
 
@@ -283,14 +283,47 @@ function CONTROL(event) {
 
 let dropStart = Date.now();
 let gameOver  = false;
+let speed     = 890; // 0.8s
 
 function drop() {
     let now   = Date.now();
     let delta = now - dropStart;
 
-    if (delta > 1000) {
+    if (delta > speed) {
         randTetro.moveDown();
         dropStart = Date.now();
+    }
+
+    if (newScore == 48) {
+        speed -90; // 0.8s
+    } else if (newScore == 91) {
+        speed -80; // 0.72s
+    } else if (newScore == 129) {
+        speed -90; // 0.63s
+    } else if (newScore == 162) {
+        speed -80; // 0.55s
+    } else if (newScore == 190) {
+        speed -80; // 0.47s
+    } else if (newScore == 213) {
+        speed -90; // 0.38s
+    } else if (newScore == 231) {
+        speed -80; // 0.30s
+    } else if (newScore == 244) {
+        speed -80; // 0.22s
+    } else if (newScore == 252) {
+        speed -90; // 0.13s
+    } else if (newScore == 258) {
+        speed -30; // 0.10s
+    } else if (newScore == 263) {
+        speed -20; // 0.08s
+    } else if (newScore == 267) {
+        speed -10; // 0.07s
+    } else if (newScore == 270) {
+        speed -20; // 0.05s
+    } else if (newScore == 272) {
+        speed -20; // 0.03s
+    } else if (newScore == 273) {
+        speed -10; // 0.02s
     }
 
     if (!gameOver) {
