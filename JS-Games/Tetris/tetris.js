@@ -66,3 +66,104 @@ function randomTetro() {
 }
 
 let randTetro = randomTetro();
+
+// ----------------------------------------------------------------- tetrominos
+
+function tetrominos(tetromino, color) {
+    this.tetromino = tetromino;
+    this.color     = color;
+
+    this.tetrominoN  = 0; // Start from the 1st pattern
+    this.activeTetro = this.tetromino[this.tetrominoN];
+
+    // Tetrominos control
+    this.x = 3;
+    this.y = -2;
+}
+
+// ------------------------------------------------------------------ fill func
+
+tetrominos.prototype.fill = function(color) {
+    for (r = 0; r < this.activeTetro.length; r++) {
+        for (c = 0; c < this.activeTetro.length; c++) {
+            // Draw only occuped squares
+            if (this.activeTetro[r][c]) {
+                drawSquare(this.x + c, this.y + r, color);
+            }
+        }
+    }
+}
+
+// ------------------------------------------------------------ Draw tetrominos
+
+tetrominos.prototype.draw = function() {
+    this.fill(this.color);
+}
+
+// ---------------------------------------------------------- Undraw tetrominos
+
+tetrominos.prototype.unDraw = function() {
+    this.fill(GDC);
+}
+
+// ------------------------------------------------------------ Move tetrominos
+
+// Down
+tetrominos.prototype.moveDown = function() {
+    if (!this.collision(0, 1, this.activeTetro)) {
+        this.unDraw();
+        this.y++
+        this.draw();
+    } else {
+        // Lock tetrominos and generate a new one
+        this.lock();
+        randTetro = randomTetro();
+    }
+}
+
+// Right
+tetrominos.prototype.moveRight = function() {
+    if (!this.collision(0, 1, this.activeTetro)) {
+        this.unDraw();
+        this.x++
+        this.draw();
+    }
+}
+
+// Left
+tetrominos.prototype.moveRight = function() {
+    if (!this.collision(0, 1, this.activeTetro)) {
+        this.unDraw();
+        this.x--
+        this.draw();
+    }
+}
+
+// Rotate
+tetrominos.prototype.rotate = function() {
+    let nextPattern = this.tetromino[(this.tetrominoN + 1) % this.tetromino.length];
+    let kick = 0;
+
+    if (this.collision(0, 0, nextPattern)) {
+        if (this.x > COL / 2) {
+            // Right wall
+            kick = -1;
+        } else {
+            // Left wall
+            kick = 1;
+        }
+    }
+
+    if (!this.collision(kick, 0, nextPattern)) {
+        this.unDraw();
+        this.x += kick;
+
+        // (0 + 1) % 4 = 1
+        this.tetrominoN  = (this.tetrominoN + 1) % this.tetromino.length;
+        this.activeTetro = this.tetromino[this.tetrominoN];
+
+        this.draw();
+    }
+}
+
+let score = 0;
